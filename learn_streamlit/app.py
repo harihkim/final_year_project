@@ -2,10 +2,23 @@ import streamlit as st
 import requests
 # import httpx
 
-uploaded_file = st.file_uploader("uploadfile")
+uploaded_file = st.file_uploader("uploadfile",label_visibility="hidden")
+st.write(" ")
+st.write(" ")
+st.write("**Select no. of copies**")
+slider = st.slider(label="number of copies", min_value=1, max_value=10, label_visibility="collapsed")
+nCopies = st.number_input('number of copies',max_value=10,min_value=1,step=1,label_visibility="collapsed")
+st.write(" ")
+st.write("**Double side or single side print**")
+print_double_side = st.checkbox(label="print double side")
+st.write(" ")
+st.write(" ")
 submit = st.button(label="submit")
 
 url = "http://localhost:8000/uploadfile/"
+
+if uploaded_file is None and submit is True:
+    st.warning("**Choose a file first!!**")
 
 if uploaded_file is not None and submit is True:
     st.write(f"uploading {uploaded_file.name}")
